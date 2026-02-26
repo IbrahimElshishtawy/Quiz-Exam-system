@@ -1,6 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/features/developer/presentation/views/developer_dashboard_view.dart';
+import 'package:flutter_application_1/features/exam/presentation/Binding/Exam_Binding.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';
 import '../features/auth/presentation/views/login_view.dart';
@@ -30,10 +32,23 @@ class AppPages {
       page: () => const PlaceholderView(title: 'Student Dashboard'),
       middlewares: [AuthMiddleware()],
     ),
-    GetPage(name: Routes.EXAM_DETAILS, page: () => const ExamDetailsView()),
-    GetPage(name: Routes.EXAM_PLAYER, page: () => const ExamPlayerView()),
-    GetPage(name: Routes.EXAM_RESULT, page: () => const ExamResultView()),
+    GetPage(
+      name: Routes.EXAM_DETAILS,
+      page: () => const ExamDetailsView(),
+      binding: ExamBinding(),
+    ),
 
+    GetPage(
+      name: Routes.EXAM_PLAYER,
+      page: () => const ExamPlayerView(),
+      binding: ExamBinding(), // ✅ ده اللي هيحل المشكلة
+    ),
+
+    GetPage(
+      name: Routes.EXAM_RESULT,
+      page: () => const ExamResultView(),
+      binding: ExamBinding(),
+    ),
     // Instructor Pages
     GetPage(
       name: Routes.INSTRUCTOR_DASHBOARD,
@@ -43,6 +58,10 @@ class AppPages {
     GetPage(name: Routes.EXAM_BUILDER, page: () => const ExamBuilderView()),
     GetPage(name: Routes.EXAM_MONITOR, page: () => const ExamMonitorView()),
     GetPage(name: Routes.EXAM_REPORTS, page: () => const ExamAnalyticsView()),
+    GetPage(
+      name: Routes.DEVELOPER_DASHBOARD,
+      page: () => const DeveloperDashboardView(),
+    ),
   ];
 }
 
