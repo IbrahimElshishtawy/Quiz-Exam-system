@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/components/app_card.dart';
 
@@ -28,30 +30,43 @@ class McqQuestionWidget extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 12),
             child: AppCard(
               onTap: () => onSelected(index),
-              color: isSelected ? Theme.of(context).colorScheme.primary.withOpacity(0.1) : null,
+              color:
+                  isSelected
+                      ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
+                      : null,
               padding: EdgeInsets.zero,
               child: ListTile(
                 leading: Container(
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: isSelected ? Theme.of(context).colorScheme.primary : Colors.grey.withOpacity(0.1),
+                    color:
+                        isSelected
+                            ? Theme.of(context).colorScheme.primary
+                            : Colors.grey.withOpacity(0.1),
                     shape: BoxShape.circle,
                   ),
                   child: Center(
                     child: Text(
                       String.fromCharCode(65 + index),
                       style: TextStyle(
-                        color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurface,
+                        color:
+                            isSelected
+                                ? Colors.white
+                                : Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
                 title: Text(options[index]),
-                trailing: isSelected
-                  ? Icon(Icons.check_circle, color: Theme.of(context).colorScheme.primary)
-                  : null,
+                trailing:
+                    isSelected
+                        ? Icon(
+                          Icons.check_circle,
+                          color: Theme.of(context).colorScheme.primary,
+                        )
+                        : null,
               ),
             ),
           );

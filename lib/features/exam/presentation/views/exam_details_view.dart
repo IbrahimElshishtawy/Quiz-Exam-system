@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/components/app_button.dart';
@@ -20,27 +22,62 @@ class ExamDetailsView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Final Computer Science Exam', style: Theme.of(context).textTheme.headlineMedium),
+                  Text(
+                    'Final Computer Science Exam',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                   const SizedBox(height: 8),
                   const Text('Room: CS-201 • Instructor: Dr. Ahmed'),
                   const Divider(height: 32),
-                  _infoRow(context, Icons.timer_outlined, 'Duration', '60 Minutes'),
-                  _infoRow(context, Icons.help_outline, 'Questions', '40 Questions'),
-                  _infoRow(context, Icons.check_circle_outline, 'Passing Score', '50%'),
-                  _infoRow(context, Icons.refresh_outlined, 'Attempts', '1 Attempt'),
+                  _infoRow(
+                    context,
+                    Icons.timer_outlined,
+                    'Duration',
+                    '60 Minutes',
+                  ),
+                  _infoRow(
+                    context,
+                    Icons.help_outline,
+                    'Questions',
+                    '40 Questions',
+                  ),
+                  _infoRow(
+                    context,
+                    Icons.check_circle_outline,
+                    'Passing Score',
+                    '50%',
+                  ),
+                  _infoRow(
+                    context,
+                    Icons.refresh_outlined,
+                    'Attempts',
+                    '1 Attempt',
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 24),
-            Text('Anti-Cheat Requirements', style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              'Anti-Cheat Requirements',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             const SizedBox(height: 12),
             AppCard(
               color: Colors.red.withOpacity(0.05),
               child: Column(
                 children: [
-                  _warningRow(context, 'Do not leave the application during the exam.'),
-                  _warningRow(context, 'Screen recording or screenshots are strictly prohibited.'),
-                  _warningRow(context, 'The exam will automatically submit if time runs out.'),
+                  _warningRow(
+                    context,
+                    'Do not leave the application during the exam.',
+                  ),
+                  _warningRow(
+                    context,
+                    'Screen recording or screenshots are strictly prohibited.',
+                  ),
+                  _warningRow(
+                    context,
+                    'The exam will automatically submit if time runs out.',
+                  ),
                 ],
               ),
             ),
@@ -49,7 +86,9 @@ class ExamDetailsView extends StatelessWidget {
               children: [
                 Checkbox(value: true, onChanged: (v) {}),
                 const Expanded(
-                  child: Text('I understand the rules and I am ready to start the exam.'),
+                  child: Text(
+                    'I understand the rules and I am ready to start the exam.',
+                  ),
                 ),
               ],
             ),
@@ -65,7 +104,12 @@ class ExamDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _infoRow(BuildContext context, IconData icon, String label, String value) {
+  Widget _infoRow(
+    BuildContext context,
+    IconData icon,
+    String label,
+    String value,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -88,7 +132,12 @@ class ExamDetailsView extends StatelessWidget {
         children: [
           const Icon(Icons.warning_amber_rounded, size: 18, color: Colors.red),
           const SizedBox(width: 8),
-          Expanded(child: Text(text, style: const TextStyle(fontSize: 13, color: Colors.red))),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 13, color: Colors.red),
+            ),
+          ),
         ],
       ),
     );

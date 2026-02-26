@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,9 +17,12 @@ class BaseController extends GetxController with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
       // User left the app - trigger anti-cheat event
-      print('Anti-cheat: App moved to background/inactive');
+      if (kDebugMode) {
+        print('Anti-cheat: App moved to background/inactive');
+      }
     }
   }
 }

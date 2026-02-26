@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/exam_controller.dart';
@@ -19,13 +21,18 @@ class ExamPlayerView extends GetView<ExamController> {
         ),
         title: Column(
           children: [
-            Obx(() => Text(
-              _formatTime(controller.remainingTime.value),
-              style: TextStyle(
-                color: controller.remainingTime.value < 300 ? AppColors.error : null,
-                fontWeight: FontWeight.bold,
+            Obx(
+              () => Text(
+                _formatTime(controller.remainingTime.value),
+                style: TextStyle(
+                  color:
+                      controller.remainingTime.value < 300
+                          ? AppColors.error
+                          : null,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            )),
+            ),
             const Text('Time Remaining', style: TextStyle(fontSize: 10)),
           ],
         ),
@@ -44,23 +51,27 @@ class ExamPlayerView extends GetView<ExamController> {
       ),
       body: Column(
         children: [
-          Obx(() => LinearProgressIndicator(
-            value: (controller.currentQuestionIndex.value + 1) / 40,
-            backgroundColor: Colors.grey.withOpacity(0.1),
-          )),
+          Obx(
+            () => LinearProgressIndicator(
+              value: (controller.currentQuestionIndex.value + 1) / 40,
+              backgroundColor: Colors.grey.withOpacity(0.1),
+            ),
+          ),
           Expanded(
             child: PageView.builder(
-              onPageChanged: (idx) => controller.currentQuestionIndex.value = idx,
+              onPageChanged:
+                  (idx) => controller.currentQuestionIndex.value = idx,
               itemBuilder: (context, index) {
                 return SingleChildScrollView(
                   padding: const EdgeInsets.all(24.0),
                   child: McqQuestionWidget(
-                    question: 'What is the primary purpose of a "Garbage Collector" in programming languages like Java or C#?',
+                    question:
+                        'What is the primary purpose of a "Garbage Collector" in programming languages like Java or C#?',
                     options: [
                       'To delete unused files from the hard drive',
                       'To automatically manage memory by reclaiming unused objects',
                       'To optimize the speed of the CPU',
-                      'To encrypt sensitive data in memory'
+                      'To encrypt sensitive data in memory',
                     ],
                     onSelected: (val) {},
                   ),
@@ -96,7 +107,11 @@ class ExamPlayerView extends GetView<ExamController> {
                 icon: const Icon(Icons.arrow_back_ios_new_rounded),
               ),
               const SizedBox(width: 8),
-              Obx(() => Text('Question ${controller.currentQuestionIndex.value + 1} of 40')),
+              Obx(
+                () => Text(
+                  'Question ${controller.currentQuestionIndex.value + 1} of 40',
+                ),
+              ),
               const SizedBox(width: 8),
               IconButton(
                 onPressed: controller.nextQuestion,
@@ -113,58 +128,82 @@ class ExamPlayerView extends GetView<ExamController> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.6,
-        maxChildSize: 0.9,
-        expand: false,
-        builder: (context, scrollController) => Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Question Palette', style: Theme.of(context).textTheme.headlineMedium),
-              const SizedBox(height: 24),
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
-                    mainAxisSpacing: 12,
-                    crossAxisSpacing: 12,
-                  ),
-                  itemCount: 40,
-                  itemBuilder: (context, index) {
-                    bool isAnswered = index < 5;
-                    bool isMarked = index == 7;
-                    bool isCurrent = index == 0;
+      builder:
+          (context) => DraggableScrollableSheet(
+            initialChildSize: 0.6,
+            maxChildSize: 0.9,
+            expand: false,
+            builder:
+                (context, scrollController) => Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Question Palette',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      const SizedBox(height: 24),
+                      Expanded(
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 5,
+                                mainAxisSpacing: 12,
+                                crossAxisSpacing: 12,
+                              ),
+                          itemCount: 40,
+                          itemBuilder: (context, index) {
+                            bool isAnswered = index < 5;
+                            bool isMarked = index == 7;
+                            bool isCurrent = index == 0;
 
-                    return GestureDetector(
-                      onTap: () => Get.back(),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: isCurrent
-                              ? AppColors.primary
-                              : (isMarked ? AppColors.warning : (isAnswered ? AppColors.primary.withOpacity(0.1) : Colors.transparent)),
-                          border: Border.all(color: isCurrent ? AppColors.primary : Colors.grey.shade300),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '${index + 1}',
-                            style: TextStyle(
-                              color: isCurrent ? Colors.white : (isMarked ? Colors.white : Theme.of(context).colorScheme.onSurface),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                            return GestureDetector(
+                              onTap: () => Get.back(),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color:
+                                      isCurrent
+                                          ? AppColors.primary
+                                          : (isMarked
+                                              ? AppColors.warning
+                                              : (isAnswered
+                                                  ? AppColors.primary
+                                                      .withOpacity(0.1)
+                                                  : Colors.transparent)),
+                                  border: Border.all(
+                                    color:
+                                        isCurrent
+                                            ? AppColors.primary
+                                            : Colors.grey.shade300,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${index + 1}',
+                                    style: TextStyle(
+                                      color:
+                                          isCurrent
+                                              ? Colors.white
+                                              : (isMarked
+                                                  ? Colors.white
+                                                  : Theme.of(
+                                                    context,
+                                                  ).colorScheme.onSurface),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                    );
-                  },
+                    ],
+                  ),
                 ),
-              ),
-            ],
           ),
-        ),
-      ),
     );
   }
 
@@ -178,7 +217,10 @@ class ExamPlayerView extends GetView<ExamController> {
           children: [
             Text('You have answered 35 out of 40 questions.'),
             SizedBox(height: 8),
-            Text('5 questions are still marked for review.', style: TextStyle(color: AppColors.warning)),
+            Text(
+              '5 questions are still marked for review.',
+              style: TextStyle(color: AppColors.warning),
+            ),
           ],
         ),
         actions: [

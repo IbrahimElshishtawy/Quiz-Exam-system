@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';
@@ -28,18 +30,9 @@ class AppPages {
       page: () => const PlaceholderView(title: 'Student Dashboard'),
       middlewares: [AuthMiddleware()],
     ),
-    GetPage(
-      name: Routes.EXAM_DETAILS,
-      page: () => const ExamDetailsView(),
-    ),
-    GetPage(
-      name: Routes.EXAM_PLAYER,
-      page: () => const ExamPlayerView(),
-    ),
-    GetPage(
-      name: Routes.EXAM_RESULT,
-      page: () => const ExamResultView(),
-    ),
+    GetPage(name: Routes.EXAM_DETAILS, page: () => const ExamDetailsView()),
+    GetPage(name: Routes.EXAM_PLAYER, page: () => const ExamPlayerView()),
+    GetPage(name: Routes.EXAM_RESULT, page: () => const ExamResultView()),
 
     // Instructor Pages
     GetPage(
@@ -47,18 +40,9 @@ class AppPages {
       page: () => const RoomDashboardView(),
       middlewares: [AuthMiddleware()],
     ),
-    GetPage(
-      name: Routes.EXAM_BUILDER,
-      page: () => const ExamBuilderView(),
-    ),
-    GetPage(
-      name: Routes.EXAM_MONITOR,
-      page: () => const ExamMonitorView(),
-    ),
-    GetPage(
-      name: Routes.EXAM_REPORTS,
-      page: () => const ExamAnalyticsView(),
-    ),
+    GetPage(name: Routes.EXAM_BUILDER, page: () => const ExamBuilderView()),
+    GetPage(name: Routes.EXAM_MONITOR, page: () => const ExamMonitorView()),
+    GetPage(name: Routes.EXAM_REPORTS, page: () => const ExamAnalyticsView()),
   ];
 }
 

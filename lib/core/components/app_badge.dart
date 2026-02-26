@@ -1,14 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class AppBadge extends StatelessWidget {
   final String label;
   final Color color;
 
-  const AppBadge({
-    super.key,
-    required this.label,
-    required this.color,
-  });
+  const AppBadge({super.key, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
