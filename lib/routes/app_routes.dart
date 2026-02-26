@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, constant_identifier_names
+
 abstract class Routes {
   static const LOGIN = '/login';
 
@@ -14,4 +16,6 @@ abstract class Routes {
   static const EXAM_REPORTS = '/exam-reports';
 
   static const ROOM_JOIN = '/room-join';
+
+  static String get EXAM => EXAM_DETAILS;
 }
