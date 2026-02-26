@@ -1,31 +1,40 @@
 import 'package:get/get.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../../routes/app_routes.dart';
-import '../../../../core/network/dio_client.dart';
+import '../../../../core/config/app_config.dart';
 
 class AuthController extends GetxController {
-  final DioClient dioClient;
-  final storage = const FlutterSecureStorage();
   var isLoading = false.obs;
-
-  AuthController(this.dioClient);
 
   Future<void> login(String username, String password) async {
     isLoading.value = true;
     try {
-      final response = await dioClient.dio.post('/auth/login', data: {
-        'username': username,
-        'password': password,
-        'deviceId': 'mock_device_id', // Should get from device_info_plus
-      });
-
-      await storage.write(key: 'access_token', value: response.data['access_token']);
-      await storage.write(key: 'refresh_token', value: response.data['refresh_token']);
-      Get.offAllNamed(Routes.ROOM_JOIN);
+      if (AppConfig.isDemoMode) {
+        _handleDemoLogin(username);
+      } else {
+        await _handleRealLogin(username, password);
+      }
     } catch (e) {
-      Get.snackbar('Error', 'Login failed');
+      Get.snackbar('Error', 'Login failed: ${e.toString()}');
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void _handleDemoLogin(String username) {
+    final box = GetStorage();
+    if (username == 'student') {
+      box.write('user_role', 'student');
+      Get.offAllNamed(Routes.EXAM_DETAILS);
+    } else {
+      box.write('user_role', 'instructor');
+      Get.offAllNamed(Routes.INSTRUCTOR_DASHBOARD);
+    }
+  }
+
+  Future<void> _handleRealLogin(String username, String password) async {
+    // Real JWT logic would go here
+    // For now, if not in demo mode, we just fail or point to real implementation
+    throw UnimplementedError('Real authentication not implemented in this demo package.');
   }
 }
