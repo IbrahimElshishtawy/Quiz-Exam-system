@@ -41,7 +41,7 @@ class _JoinRoomViewState extends State<JoinRoomView> {
     if (!(_formKey.currentState?.validate() ?? false)) return;
 
     final code = _roomCodeCtrl.text.trim().toUpperCase();
-    final pass = _passwordCtrl.text.trim();
+    // final pass = _passwordCtrl.text.trim();
 
     // لو joinRoom عندك بياخد code بس:
     controller.joinRoom(code);

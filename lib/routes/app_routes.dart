@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names
 
 abstract class Routes {
+  static const SPLASH = '/splash';
   static const LOGIN = '/login';
 
   // Student Routes

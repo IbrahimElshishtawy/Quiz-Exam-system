@@ -6,6 +6,7 @@ import 'package:flutter_application_1/features/exam/presentation/Binding/Exam_Bi
 import 'package:get/get.dart';
 import 'app_routes.dart';
 import '../features/auth/presentation/views/login_view.dart';
+import '../features/auth/presentation/views/splash_view.dart';
 import '../features/auth/bindings/auth_binding.dart';
 import '../features/exam/presentation/views/exam_player_view.dart';
 import '../features/exam/presentation/views/exam_details_view.dart';
@@ -17,9 +18,13 @@ import '../features/reports/presentation/views/exam_analytics_view.dart';
 import '../core/middleware/auth_middleware.dart';
 
 class AppPages {
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
+    GetPage(
+      name: Routes.SPLASH,
+      page: () => const SplashView(),
+    ),
     GetPage(
       name: Routes.LOGIN,
       page: () => const LoginView(),
