@@ -43,7 +43,7 @@ class WelcomeActionButtons extends StatelessWidget {
                 const Icon(Icons.login_rounded, size: 20),
                 const SizedBox(width: 8),
                 Text(
-                  'تسجيل الدخول',
+                  'login'.tr,
                   style: GoogleFonts.notoKufiArabic(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class WelcomeActionButtons extends StatelessWidget {
                 const Icon(Icons.person_add_alt_1_rounded, size: 20),
                 const SizedBox(width: 8),
                 Text(
-                  'إنشاء حساب جديد',
+                  'register'.tr,
                   style: GoogleFonts.notoKufiArabic(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,

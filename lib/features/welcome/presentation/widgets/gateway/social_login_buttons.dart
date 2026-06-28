@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../controllers/welcome_controller.dart';
 
@@ -23,7 +24,7 @@ class SocialLoginButtons extends StatelessWidget {
           child: SizedBox(
             height: 52,
             child: OutlinedButton(
-              onPressed: loading ? null : () => controller.handleSocialSignIn('جوجل'),
+              onPressed: loading ? null : () => controller.handleSocialSignIn('google'.tr),
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.5),
                 shape: RoundedRectangleBorder(
@@ -36,7 +37,7 @@ class SocialLoginButtons extends StatelessWidget {
                   const Icon(Icons.g_mobiledata_rounded, color: Colors.redAccent, size: 26),
                   const SizedBox(width: 4),
                   Text(
-                    'جوجل',
+                    'google'.tr,
                     style: GoogleFonts.notoKufiArabic(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -55,7 +56,7 @@ class SocialLoginButtons extends StatelessWidget {
           child: SizedBox(
             height: 52,
             child: OutlinedButton(
-              onPressed: loading ? null : () => controller.handleSocialSignIn('أبل'),
+              onPressed: loading ? null : () => controller.handleSocialSignIn('apple'.tr),
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.5),
                 shape: RoundedRectangleBorder(
@@ -68,7 +69,7 @@ class SocialLoginButtons extends StatelessWidget {
                   const Icon(Icons.apple, color: Colors.black87, size: 22),
                   const SizedBox(width: 6),
                   Text(
-                    'أبل',
+                    'apple'.tr,
                     style: GoogleFonts.notoKufiArabic(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,

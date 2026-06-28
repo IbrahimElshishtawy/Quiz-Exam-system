@@ -18,7 +18,7 @@ class WelcomeBottomLinks extends StatelessWidget {
           onPressed: () => Get.toNamed(Routes.WELCOME_SETUP),
           icon: const Icon(Icons.language_rounded, color: primaryColor, size: 20),
           label: Text(
-            'تغيير اللغة',
+            'change_language'.tr,
             style: GoogleFonts.notoKufiArabic(
               color: primaryColor,
               fontSize: 14,
@@ -32,7 +32,7 @@ class WelcomeBottomLinks extends StatelessWidget {
           onPressed: () => Get.toNamed(Routes.WELCOME_SETUP),
           icon: const Icon(Icons.supervised_user_circle_rounded, color: primaryColor, size: 20),
           label: Text(
-            'اختيار الدور',
+            'choose_role'.tr,
             style: GoogleFonts.notoKufiArabic(
               color: primaryColor,
               fontSize: 14,

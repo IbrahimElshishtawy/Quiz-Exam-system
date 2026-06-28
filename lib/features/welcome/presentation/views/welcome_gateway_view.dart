@@ -42,7 +42,7 @@ class WelcomeGatewayView extends GetView<WelcomeController> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
-                            'أو المتابعة عبر',
+                            'or_continue_with'.tr,
                             style: GoogleFonts.notoKufiArabic(
                               color: const Color(0xFF94A3B8),
                               fontSize: 12,
@@ -64,7 +64,7 @@ class WelcomeGatewayView extends GetView<WelcomeController> {
 
                     // Privacy disclaimers
                     Text(
-                      'بالمتابعة، أنت توافق على شروط الخدمة وسياسة الخصوصية الخاصة بنا.',
+                      'privacy_disclaimer'.tr,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.notoKufiArabic(
                         color: const Color(0xFF94A3B8),

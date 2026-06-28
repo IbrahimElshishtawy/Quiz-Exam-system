@@ -36,6 +36,16 @@ class AppTranslations extends Translations {
           'student_desc': 'الوصول إلى الاختبارات والنتائج',
           'teacher_desc': 'إدارة الاختبارات والتقييمات',
           'continue_btn': 'متابعة',
+          'login': 'تسجيل الدخول',
+          'register': 'إنشاء حساب جديد',
+          'welcome_title': 'مرحباً بك في إيدو أسيس',
+          'welcome_desc': 'منصة التقييم الذكية المدعومة بالذكاء الاصطناعي لمستقبل تعليمي أفضل.',
+          'or_continue_with': 'أو المتابعة عبر',
+          'google': 'جوجل',
+          'apple': 'أبل',
+          'change_language': 'تغيير اللغة',
+          'privacy_disclaimer': 'بالمتابعة، أنت توافق على شروط الخدمة وسياسة الخصوصية الخاصة بنا.',
+          'skip': 'تخطي',
         },
         'en': {
           'app_name': 'EduAssess AI',
@@ -70,6 +80,16 @@ class AppTranslations extends Translations {
           'student_desc': 'Access exams and view results',
           'teacher_desc': 'Manage exams and assessments',
           'continue_btn': 'Continue',
+          'login': 'Login',
+          'register': 'Register New Account',
+          'welcome_title': 'Welcome to EduAssess',
+          'welcome_desc': 'AI-powered smart assessment platform for a better educational future.',
+          'or_continue_with': 'Or continue with',
+          'google': 'Google',
+          'apple': 'Apple',
+          'change_language': 'Change Language',
+          'privacy_disclaimer': 'By continuing, you agree to our Terms of Service and Privacy Policy.',
+          'skip': 'Skip',
         }
       };
 }

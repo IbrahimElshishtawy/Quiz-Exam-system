@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../gateway_illustration.dart';
 
@@ -32,7 +33,7 @@ class WelcomeTitleSection extends StatelessWidget {
 
         // Greeting Headlines
         Text(
-          'مرحباً بك في إيدو أسيس',
+          'welcome_title'.tr,
           textAlign: TextAlign.center,
           style: GoogleFonts.notoKufiArabic(
             color: textDark,
@@ -43,7 +44,7 @@ class WelcomeTitleSection extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          'منصة التقييم الذكية المدعومة بالذكاء الاصطناعي لمستقبل تعليمي أفضل.',
+          'welcome_desc'.tr,
           textAlign: TextAlign.center,
           style: GoogleFonts.notoKufiArabic(
             color: const Color(0xFF64748B),
