@@ -4,6 +4,7 @@ import '../../../../routes/app_routes.dart';
 import '../../domain/entities/welcome_config_entity.dart';
 import '../../domain/usecases/get_welcome_config.dart';
 import '../../domain/usecases/save_welcome_config.dart';
+import '../../../../core/controllers/settings_controller.dart';
 
 class WelcomeController extends GetxController {
   final GetWelcomeConfig getWelcomeConfigUseCase;
@@ -29,14 +30,23 @@ class WelcomeController extends GetxController {
     if (config != null) {
       selectedLanguage.value = config.languageCode;
       selectedRole.value = config.role;
-      // Apply the language locale immediately
-      Get.updateLocale(Locale(config.languageCode));
+      try {
+        final settingsController = Get.find<SettingsController>();
+        settingsController.changeLanguage(config.languageCode);
+      } catch (_) {
+        Get.updateLocale(Locale(config.languageCode));
+      }
     }
   }
 
   void changeLanguage(String langCode) {
     selectedLanguage.value = langCode;
-    Get.updateLocale(Locale(langCode));
+    try {
+      final settingsController = Get.find<SettingsController>();
+      settingsController.changeLanguage(langCode);
+    } catch (_) {
+      Get.updateLocale(Locale(langCode));
+    }
   }
 
   void changeRole(String role) {

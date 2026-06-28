@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../routes/app_routes.dart';
 import '../controllers/instructor_dashboard_controller.dart';
+import '../../../../core/controllers/settings_controller.dart';
 
 class InstructorSettingsTab extends GetView<InstructorDashboardController> {
   const InstructorSettingsTab({super.key});
