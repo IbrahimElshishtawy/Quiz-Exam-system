@@ -5,6 +5,8 @@ import '../controllers/welcome_controller.dart';
 import '../widgets/language_selector_widget.dart';
 import '../widgets/role_card_widget.dart';
 import '../widgets/setup_illustration.dart';
+import '../widgets/setup/setup_header_section.dart';
+import '../widgets/setup/setup_continue_button.dart';
 
 class WelcomeSetupView extends GetView<WelcomeController> {
   const WelcomeSetupView({super.key});
@@ -55,44 +57,8 @@ class WelcomeSetupView extends GetView<WelcomeController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 12),
-                    // Small Cap Logo
-                    Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDBEAFE), // Light blue-purple
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: const Icon(
-                          Icons.school_rounded,
-                          color: primaryColor,
-                          size: 32,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Headings
-                    Text(
-                      'أهلاً بك في منصة الاختبارات',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.notoKufiArabic(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: textDark,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'قم بتخصيص تجربتك للبدء في رحلتك التعليمية',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.notoKufiArabic(
-                        fontSize: 13,
-                        fontWeight: FontWeight.normal,
-                        color: const Color(0xFF64748B),
-                      ),
-                    ),
+                    // Header Logo & Headings
+                    const SetupHeaderSection(),
                     const SizedBox(height: 28),
 
                     // Language Selection Section
@@ -153,47 +119,18 @@ class WelcomeSetupView extends GetView<WelcomeController> {
             ),
 
             // Bottom Continue Action Button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-              child: SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    await controller.saveSettings();
-                    Get.back();
-                    Get.snackbar(
-                      'تم التخصيص',
-                      'تم حفظ إعدادات التطبيق بنجاح.',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: primaryColor,
-                      colorText: Colors.white,
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF94A3B8), // Soft slate grey as seen in screenshot
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.arrow_back, color: Colors.white, size: 18),
-                      const SizedBox(width: 8),
-                      Text(
-                        'متابعة',
-                        style: GoogleFonts.notoKufiArabic(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            SetupContinueButton(
+              onPressed: () async {
+                await controller.saveSettings();
+                Get.back();
+                Get.snackbar(
+                  'تم التخصيص',
+                  'تم حفظ إعدادات التطبيق بنجاح.',
+                  snackPosition: SnackPosition.BOTTOM,
+                  backgroundColor: primaryColor,
+                  colorText: Colors.white,
+                );
+              },
             ),
           ],
         ),
