@@ -315,7 +315,7 @@ class InstructorHomeTab extends GetView<InstructorDashboardController> {
               const SizedBox(height: 12),
 
               // Activities Card list
-              _buildActivityItem('أحمد محمود سلم اختبار اللغة العربية', 'منذ 5 دقائق', 'النتيجة: 92/100', Colors.emerald),
+              _buildActivityItem('أحمد محمود سلم اختبار اللغة العربية', 'منذ 5 دقائق', 'النتيجة: 92/100', const Color(0xFF10B981)),
               _buildActivityItem('تم إنشاء تقرير الأداء الفصلي للفصل أ/1', 'منذ 20 دقيقة', 'جاهز للتحميل والتصدير', primaryColor),
               _buildActivityWarningItem('سارة علي لم تكمل الاختبار (انقطاع الاتصال)', 'منذ ساعة', 'مراسلة'),
               const SizedBox(height: 24),

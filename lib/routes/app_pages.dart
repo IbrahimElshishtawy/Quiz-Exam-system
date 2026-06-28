@@ -18,7 +18,6 @@ import '../features/exam/presentation/views/exam_player_view.dart';
 import '../features/exam/presentation/views/exam_details_view.dart';
 import '../features/exam/presentation/views/exam_result_view.dart';
 import '../features/exam/presentation/views/exam_builder_view.dart';
-import '../features/room/presentation/views/room_dashboard_view.dart';
 import '../features/reports/presentation/views/exam_reports_view.dart';
 import '../features/reports/presentation/views/exam_analytics_view.dart';
 import '../features/student_dashboard/presentation/views/student_dashboard_layout.dart';
