@@ -17,7 +17,8 @@ import '../features/welcome/bindings/welcome_binding.dart';
 import '../features/exam/presentation/views/exam_player_view.dart';
 import '../features/exam/presentation/views/exam_details_view.dart';
 import '../features/exam/presentation/views/exam_result_view.dart';
-import '../features/exam/presentation/views/exam_builder_view.dart';
+import '../features/exam_builder/presentation/views/exam_builder_layout.dart';
+import '../features/exam_builder/bindings/exam_builder_binding.dart';
 import '../features/reports/presentation/views/exam_reports_view.dart';
 import '../features/reports/presentation/views/exam_analytics_view.dart';
 import '../features/student_dashboard/presentation/views/student_dashboard_layout.dart';
@@ -97,7 +98,11 @@ class AppPages {
       binding: InstructorDashboardBinding(),
       middlewares: [AuthMiddleware()],
     ),
-    GetPage(name: Routes.EXAM_BUILDER, page: () => const ExamBuilderView()),
+    GetPage(
+      name: Routes.EXAM_BUILDER,
+      page: () => const ExamBuilderLayout(),
+      binding: ExamBuilderBinding(),
+    ),
     GetPage(name: Routes.EXAM_MONITOR, page: () => const ExamMonitorView()),
     GetPage(name: Routes.EXAM_REPORTS, page: () => const ExamAnalyticsView()),
     GetPage(
