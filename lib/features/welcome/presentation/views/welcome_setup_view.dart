@@ -22,6 +22,7 @@ class WelcomeSetupView extends GetView<WelcomeController> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+        leadingWidth: 80,
         leading: TextButton(
           onPressed: () => Get.back(),
           child: Text(

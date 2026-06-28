@@ -14,29 +14,38 @@ class WelcomeBottomLinks extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // Change language
-        TextButton.icon(
-          onPressed: () => Get.toNamed(Routes.WELCOME_SETUP),
-          icon: const Icon(Icons.language_rounded, color: primaryColor, size: 20),
-          label: Text(
-            'change_language'.tr,
-            style: GoogleFonts.notoKufiArabic(
-              color: primaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+        Expanded(
+          child: TextButton.icon(
+            onPressed: () => Get.toNamed(Routes.WELCOME_SETUP),
+            icon: const Icon(Icons.language_rounded, color: primaryColor, size: 18),
+            label: Text(
+              'change_language'.tr,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: GoogleFonts.notoKufiArabic(
+                color: primaryColor,
+                fontSize: 12.5,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
+        const SizedBox(width: 8),
 
         // Choose Role
-        TextButton.icon(
-          onPressed: () => Get.toNamed(Routes.WELCOME_SETUP),
-          icon: const Icon(Icons.supervised_user_circle_rounded, color: primaryColor, size: 20),
-          label: Text(
-            'choose_role'.tr,
-            style: GoogleFonts.notoKufiArabic(
-              color: primaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+        Expanded(
+          child: TextButton.icon(
+            onPressed: () => Get.toNamed(Routes.WELCOME_SETUP),
+            icon: const Icon(Icons.supervised_user_circle_rounded, color: primaryColor, size: 18),
+            label: Text(
+              'choose_role'.tr,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: GoogleFonts.notoKufiArabic(
+                color: primaryColor,
+                fontSize: 12.5,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
