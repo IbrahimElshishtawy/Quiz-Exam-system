@@ -87,11 +87,33 @@ class StudentSettingsTab extends StatelessWidget {
               _buildMenuItem(Icons.lock_outline_rounded, 'تغيير كلمة المرور'),
               
               // Dynamic link to language/role selection screen
-              _buildMenuItem(
-                Icons.language_rounded,
-                'اللغة والدور المخصص',
-                onTap: () => Get.toNamed(Routes.WELCOME_SETUP),
-              ),
+              Obx(() {
+                final settingsController = Get.find<SettingsController>();
+                final isAr = settingsController.languageCode.value == 'ar';
+                return _buildMenuItem(
+                  Icons.language_rounded,
+                  'language'.tr,
+                  subtitle: isAr ? 'العربية' : 'English',
+                  onTap: () {
+                    if (isAr) {
+                      settingsController.changeLanguage('en');
+                    } else {
+                      settingsController.changeLanguage('ar');
+                    }
+                  },
+                );
+              }),
+              
+              // Dark mode switch
+              Obx(() {
+                final settingsController = Get.find<SettingsController>();
+                return _buildSwitchItem(
+                  Icons.dark_mode_outlined,
+                  'darkMode'.tr,
+                  settingsController.isDarkMode.value,
+                  (val) => settingsController.toggleTheme(val),
+                );
+              }),
               
               _buildMenuItem(Icons.info_outline_rounded, 'حول التطبيق'),
               const SizedBox(height: 24),
@@ -130,7 +152,8 @@ class StudentSettingsTab extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuItem(IconData icon, String title, {VoidCallback? onTap}) {
+  Widget _buildMenuItem(IconData icon, String title, {String? subtitle, VoidCallback? onTap}) {
+    final isRtl = Get.locale?.languageCode == 'ar';
     const textDark = Color(0xFF1E293B);
 
     return Container(
@@ -140,18 +163,71 @@ class StudentSettingsTab extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
       ),
       child: ListTile(
-        onTap: onTap ?? () => Get.snackbar('تنبيه', 'هذه الميزة غير متوفرة في النسخة التجريبية حالياً.'),
-        trailing: Icon(icon, color: const Color(0xFF64748B)),
+        onTap: onTap ?? () => Get.snackbar('alert'.tr, 'not_available_demo'.tr),
+        leading: isRtl 
+            ? const Icon(Icons.chevron_left_rounded, color: Color(0xFF94A3B8))
+            : Icon(icon, color: const Color(0xFF64748B)),
+        trailing: isRtl
+            ? Icon(icon, color: const Color(0xFF64748B))
+            : const Icon(Icons.chevron_right_rounded, color: Color(0xFF94A3B8)),
         title: Text(
           title,
-          textAlign: TextAlign.right,
+          textAlign: isRtl ? TextAlign.right : TextAlign.left,
           style: GoogleFonts.notoKufiArabic(
             fontSize: 13,
             fontWeight: FontWeight.bold,
             color: textDark,
           ),
         ),
-        leading: const Icon(Icons.chevron_left_rounded, color: Color(0xFF94A3B8)),
+        subtitle: subtitle != null
+            ? Text(
+                subtitle,
+                textAlign: isRtl ? TextAlign.right : TextAlign.left,
+                style: GoogleFonts.notoKufiArabic(
+                  fontSize: 10.5,
+                  color: const Color(0xFF64748B),
+                ),
+              )
+            : null,
+      ),
+    );
+  }
+
+  Widget _buildSwitchItem(IconData icon, String title, bool value, ValueChanged<bool> onChanged) {
+    final isRtl = Get.locale?.languageCode == 'ar';
+    const textDark = Color(0xFF1E293B);
+    const primaryColor = Color(0xFF005BBF);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF8FAFC),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: ListTile(
+        leading: isRtl
+            ? Switch.adaptive(
+                value: value,
+                onChanged: onChanged,
+                activeColor: primaryColor,
+              )
+            : Icon(icon, color: const Color(0xFF64748B)),
+        trailing: isRtl
+            ? Icon(icon, color: const Color(0xFF64748B))
+            : Switch.adaptive(
+                value: value,
+                onChanged: onChanged,
+                activeColor: primaryColor,
+              ),
+        title: Text(
+          title,
+          textAlign: isRtl ? TextAlign.right : TextAlign.left,
+          style: GoogleFonts.notoKufiArabic(
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            color: textDark,
+          ),
+        ),
       ),
     );
   }

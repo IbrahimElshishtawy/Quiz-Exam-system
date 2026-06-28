@@ -215,12 +215,22 @@ class InstructorSettingsTab extends GetView<InstructorDashboardController> {
                   children: [
                     _buildMenuItem(Icons.shield_outlined, 'أمن الحساب'),
                     const Divider(color: Color(0xFFE2E8F0), height: 1),
-                    _buildMenuItem(
-                      Icons.translate_rounded,
-                      'لغة التطبيق',
-                      subtitle: 'العربية',
-                      onTap: () => Get.toNamed(Routes.WELCOME_SETUP),
-                    ),
+                    Obx(() {
+                      final settingsController = Get.find<SettingsController>();
+                      final isAr = settingsController.languageCode.value == 'ar';
+                      return _buildMenuItem(
+                        Icons.translate_rounded,
+                        'language'.tr,
+                        subtitle: isAr ? 'العربية' : 'English',
+                        onTap: () {
+                          if (isAr) {
+                            settingsController.changeLanguage('en');
+                          } else {
+                            settingsController.changeLanguage('ar');
+                          }
+                        },
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -229,7 +239,7 @@ class InstructorSettingsTab extends GetView<InstructorDashboardController> {
               // 4. "تفضيلات التطبيق" Section Header
               Text(
                 'تفضيلات التطبيق',
-                textAlign: TextAlign.right,
+                textAlign: Get.locale?.languageCode == 'ar' ? TextAlign.right : TextAlign.left,
                 style: GoogleFonts.notoKufiArabic(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
@@ -255,12 +265,15 @@ class InstructorSettingsTab extends GetView<InstructorDashboardController> {
                         )),
                     const Divider(color: Color(0xFFE2E8F0), height: 1),
                     // Dark mode switch
-                    Obx(() => _buildSwitchItem(
-                          Icons.dark_mode_outlined,
-                          'الوضع الليلي',
-                          controller.darkModeEnabled.value,
-                          (val) => controller.darkModeEnabled.value = val,
-                        )),
+                    Obx(() {
+                      final settingsController = Get.find<SettingsController>();
+                      return _buildSwitchItem(
+                        Icons.dark_mode_outlined,
+                        'darkMode'.tr,
+                        settingsController.isDarkMode.value,
+                        (val) => settingsController.toggleTheme(val),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -301,22 +314,35 @@ class InstructorSettingsTab extends GetView<InstructorDashboardController> {
   }
 
   Widget _buildMenuItem(IconData icon, String title, {String? subtitle, VoidCallback? onTap}) {
+    final isRtl = Get.locale?.languageCode == 'ar';
     const textDark = Color(0xFF1E293B);
     const primaryColor = Color(0xFF005BBF);
 
     return ListTile(
-      onTap: onTap ?? () => Get.snackbar('تنبيه', 'هذه الميزة غير متوفرة في النسخة التجريبية حالياً.'),
-      trailing: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: const BoxDecoration(
-          color: Color(0xFFEFF6FF),
-          shape: BoxShape.circle,
-        ),
-        child: Icon(icon, color: primaryColor, size: 20),
-      ),
+      onTap: onTap ?? () => Get.snackbar('alert'.tr, 'not_available_demo'.tr),
+      leading: isRtl 
+          ? const Icon(Icons.chevron_left_rounded, color: Color(0xFF94A3B8))
+          : Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: Color(0xFFEFF6FF),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: primaryColor, size: 20),
+            ),
+      trailing: isRtl
+          ? Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: Color(0xFFEFF6FF),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: primaryColor, size: 20),
+            )
+          : const Icon(Icons.chevron_right_rounded, color: Color(0xFF94A3B8)),
       title: Text(
         title,
-        textAlign: TextAlign.right,
+        textAlign: isRtl ? TextAlign.right : TextAlign.left,
         style: GoogleFonts.notoKufiArabic(
           fontSize: 12.5,
           fontWeight: FontWeight.bold,
@@ -326,43 +352,58 @@ class InstructorSettingsTab extends GetView<InstructorDashboardController> {
       subtitle: subtitle != null
           ? Text(
               subtitle,
-              textAlign: TextAlign.right,
+              textAlign: isRtl ? TextAlign.right : TextAlign.left,
               style: GoogleFonts.notoKufiArabic(
                 fontSize: 10,
                 color: const Color(0xFF64748B),
               ),
             )
           : null,
-      leading: const Icon(Icons.chevron_left_rounded, color: Color(0xFF94A3B8)),
     );
   }
 
   Widget _buildSwitchItem(IconData icon, String title, bool value, ValueChanged<bool> onChanged) {
+    final isRtl = Get.locale?.languageCode == 'ar';
     const textDark = Color(0xFF1E293B);
     const primaryColor = Color(0xFF005BBF);
 
     return ListTile(
-      trailing: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: const BoxDecoration(
-          color: Color(0xFFEFF6FF),
-          shape: BoxShape.circle,
-        ),
-        child: Icon(icon, color: primaryColor, size: 20),
-      ),
+      leading: isRtl
+          ? Switch.adaptive(
+              value: value,
+              onChanged: onChanged,
+              activeColor: primaryColor,
+            )
+          : Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: Color(0xFFEFF6FF),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: primaryColor, size: 20),
+            ),
+      trailing: isRtl
+          ? Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: Color(0xFFEFF6FF),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: primaryColor, size: 20),
+            )
+          : Switch.adaptive(
+              value: value,
+              onChanged: onChanged,
+              activeColor: primaryColor,
+            ),
       title: Text(
         title,
-        textAlign: TextAlign.right,
+        textAlign: isRtl ? TextAlign.right : TextAlign.left,
         style: GoogleFonts.notoKufiArabic(
           fontSize: 12.5,
           fontWeight: FontWeight.bold,
           color: textDark,
         ),
-      ),
-      leading: Switch.adaptive(
-        value: value,
-        onChanged: onChanged,
-        activeColor: primaryColor,
       ),
     );
   }
