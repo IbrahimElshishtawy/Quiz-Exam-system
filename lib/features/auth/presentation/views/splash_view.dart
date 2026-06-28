@@ -146,67 +146,28 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
                     );
                   },
                   child: Container(
-                    width: 130,
-                    height: 130,
+                    width: 140,
+                    height: 140,
                     decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(32),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(36),
                       boxShadow: [
                         BoxShadow(
-                          color: primaryColor.withOpacity(0.2),
-                          blurRadius: 16,
-                          offset: const Offset(0, 8),
+                          color: primaryColor.withOpacity(0.12),
+                          blurRadius: 24,
+                          offset: const Offset(0, 12),
                         ),
                       ],
                     ),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        // Inner thin border simulation
-                        Positioned.fill(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(32),
-                              border: Border.all(
-                                color: Colors.white.withOpacity(0.2),
-                                width: 4,
-                              ),
-                            ),
-                          ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(36),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'assets/images/app_logo.png',
+                          fit: BoxFit.contain,
                         ),
-                        // Graduation AI cap/school icon
-                        const Center(
-                          child: Icon(
-                            Icons.school_rounded,
-                            color: Colors.white,
-                            size: 70,
-                          ),
-                        ),
-                        // Neurology node hybrid overlay
-                        Positioned(
-                          bottom: -8,
-                          right: -8,
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.psychology_rounded,
-                              color: primaryColor,
-                              size: 26,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
