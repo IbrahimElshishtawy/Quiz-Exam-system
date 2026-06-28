@@ -39,14 +39,14 @@ class LoginView extends GetView<AuthController> {
                     const Icon(Icons.lock_rounded, size: 56),
                     const SizedBox(height: 12),
                     Text(
-                      'Welcome back',
+                      'welcome_back'.tr,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineSmall
                           ?.copyWith(fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Sign in to continue',
+                      'sign_in_continue'.tr,
                       textAlign: TextAlign.center,
                       style: Theme.of(
                         context,
@@ -60,7 +60,7 @@ class LoginView extends GetView<AuthController> {
                       controller: usernameCtrl,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
-                        labelText: 'Username',
+                        labelText: 'username'.tr,
                         hintText: 'student / instructor / developer',
                         prefixIcon: const Icon(Icons.person_outline),
                         border: OutlineInputBorder(
@@ -69,7 +69,7 @@ class LoginView extends GetView<AuthController> {
                       ),
                       validator: (v) {
                         if (v == null || v.trim().isEmpty) {
-                          return 'اكتب اسم المستخدم';
+                          return 'enter_username'.tr;
                         }
                         return null;
                       },
@@ -85,7 +85,7 @@ class LoginView extends GetView<AuthController> {
                         textInputAction: TextInputAction.done,
                         onFieldSubmitted: (_) => submit(),
                         decoration: InputDecoration(
-                          labelText: 'Password',
+                          labelText: 'password'.tr,
                           hintText: '1234 / dev123',
                           prefixIcon: const Icon(Icons.lock_outline),
                           border: OutlineInputBorder(
@@ -105,10 +105,10 @@ class LoginView extends GetView<AuthController> {
                         ),
                         validator: (v) {
                           if (v == null || v.trim().isEmpty) {
-                            return 'اكتب كلمة المرور';
+                            return 'enter_password'.tr;
                           }
                           if (v.trim().length < 3) {
-                            return 'كلمة المرور قصيرة';
+                            return 'password_short_login'.tr;
                           }
                           return null;
                         },
@@ -137,10 +137,10 @@ class LoginView extends GetView<AuthController> {
                                       strokeWidth: 2,
                                     ),
                                   )
-                                  : const Text(
-                                    'Login',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
+                                  : Text(
+                                      'login'.tr,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
                         ),
                       ),
                     ),

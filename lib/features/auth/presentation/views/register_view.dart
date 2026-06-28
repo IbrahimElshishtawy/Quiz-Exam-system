@@ -21,6 +21,7 @@ class RegisterView extends GetView<AuthController> {
 
     const primaryColor = Color(0xFF005BBF);
     const textDark = Color(0xFF1E293B);
+    final isAr = Get.locale?.languageCode == 'ar';
 
     void submit() {
       FocusManager.instance.primaryFocus?.unfocus();
@@ -29,8 +30,8 @@ class RegisterView extends GetView<AuthController> {
 
       if (!agreeToTerms.value) {
         Get.snackbar(
-          'تنبيه',
-          'يجب الموافقة على شروط الخدمة وسياسة الخصوصية للمتابعة.',
+          'alert'.tr,
+          'terms_error'.tr,
           snackPosition: SnackPosition.TOP,
           backgroundColor: const Color(0xFFEF4444),
           colorText: Colors.white,
@@ -48,11 +49,14 @@ class RegisterView extends GetView<AuthController> {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded, color: primaryColor),
+          icon: Icon(
+            isAr ? Icons.arrow_back_rounded : Icons.arrow_forward_rounded,
+            color: primaryColor,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Text(
-          'إنشاء حساب',
+          'create_account'.tr,
           style: GoogleFonts.notoKufiArabic(
             color: primaryColor,
             fontSize: 18,
@@ -111,7 +115,7 @@ class RegisterView extends GetView<AuthController> {
 
                       // Greetings
                       Text(
-                        'مرحباً بك في EduAssess AI',
+                        'register_title'.tr,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.notoKufiArabic(
                           fontSize: 20,
@@ -121,7 +125,7 @@ class RegisterView extends GetView<AuthController> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'ابدأ رحلتك التعليمية الذكية اليوم',
+                        'register_subtitle'.tr,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.notoKufiArabic(
                           fontSize: 13,
@@ -134,9 +138,8 @@ class RegisterView extends GetView<AuthController> {
                       TextFormField(
                         controller: nameCtrl,
                         textInputAction: TextInputAction.next,
-                        textAlign: TextAlign.right,
                         decoration: InputDecoration(
-                          hintText: 'الاسم الكامل',
+                          hintText: 'full_name'.tr,
                           prefixIcon: const Icon(Icons.person_outline),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(14),
@@ -144,7 +147,7 @@ class RegisterView extends GetView<AuthController> {
                         ),
                         validator: (v) {
                           if (v == null || v.trim().isEmpty) {
-                            return 'يرجى إدخال الاسم الكامل';
+                            return 'enter_full_name'.tr;
                           }
                           return null;
                         },
@@ -156,9 +159,8 @@ class RegisterView extends GetView<AuthController> {
                         controller: emailCtrl,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
-                        textAlign: TextAlign.right,
                         decoration: InputDecoration(
-                          hintText: 'البريد الإلكتروني',
+                          hintText: 'email'.tr,
                           prefixIcon: const Icon(Icons.email_outlined),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(14),
@@ -166,10 +168,10 @@ class RegisterView extends GetView<AuthController> {
                         ),
                         validator: (v) {
                           if (v == null || v.trim().isEmpty) {
-                            return 'يرجى إدخال البريد الإلكتروني';
+                            return 'enter_email'.tr;
                           }
                           if (!v.contains('@') || !v.contains('.')) {
-                            return 'البريد الإلكتروني غير صالح';
+                            return 'invalid_email'.tr;
                           }
                           return null;
                         },
@@ -182,9 +184,8 @@ class RegisterView extends GetView<AuthController> {
                           controller: passCtrl,
                           obscureText: isPasswordHidden.value,
                           textInputAction: TextInputAction.next,
-                          textAlign: TextAlign.right,
                           decoration: InputDecoration(
-                            hintText: 'كلمة المرور',
+                            hintText: 'password'.tr,
                             prefixIcon: const Icon(Icons.lock_outline),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(14),
@@ -200,10 +201,10 @@ class RegisterView extends GetView<AuthController> {
                           ),
                           validator: (v) {
                             if (v == null || v.trim().isEmpty) {
-                              return 'يرجى إدخال كلمة المرور';
+                              return 'enter_password_reg'.tr;
                             }
                             if (v.trim().length < 6) {
-                              return 'يجب أن تكون كلمة المرور 6 أحرف على الأقل';
+                              return 'password_short_reg'.tr;
                             }
                             return null;
                           },
@@ -217,10 +218,9 @@ class RegisterView extends GetView<AuthController> {
                           controller: confirmPassCtrl,
                           obscureText: isConfirmPasswordHidden.value,
                           textInputAction: TextInputAction.done,
-                          textAlign: TextAlign.right,
                           onFieldSubmitted: (_) => submit(),
                           decoration: InputDecoration(
-                            hintText: 'تأكيد كلمة المرور',
+                            hintText: 'confirm_password'.tr,
                             prefixIcon: const Icon(Icons.shield_outlined),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(14),
@@ -236,10 +236,10 @@ class RegisterView extends GetView<AuthController> {
                           ),
                           validator: (v) {
                             if (v == null || v.trim().isEmpty) {
-                              return 'يرجى تأكيد كلمة المرور';
+                              return 'enter_confirm_password'.tr;
                             }
                             if (v != passCtrl.text) {
-                              return 'كلمات المرور غير متطابقة';
+                              return 'passwords_dont_match'.tr;
                             }
                             return null;
                           },
@@ -247,28 +247,47 @@ class RegisterView extends GetView<AuthController> {
                       ),
                       const SizedBox(height: 12),
 
-                      // Terms Agreement Checkbox
+                      // Terms Agreement Checkbox (Layout direction adapted)
                       Obx(
                         () => Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'أوافق على شروط الخدمة و سياسة الخصوصية.',
-                              style: GoogleFonts.notoKufiArabic(
-                                fontSize: 12,
-                                color: primaryColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Checkbox(
-                              value: agreeToTerms.value,
-                              onChanged: (v) => agreeToTerms.value = v ?? false,
-                              activeColor: primaryColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                          ],
+                          mainAxisAlignment: isAr ? MainAxisAlignment.end : MainAxisAlignment.start,
+                          children: isAr
+                              ? [
+                                  Text(
+                                    'agree_to_terms'.tr,
+                                    style: GoogleFonts.notoKufiArabic(
+                                      fontSize: 12,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Checkbox(
+                                    value: agreeToTerms.value,
+                                    onChanged: (v) => agreeToTerms.value = v ?? false,
+                                    activeColor: primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                ]
+                              : [
+                                  Checkbox(
+                                    value: agreeToTerms.value,
+                                    onChanged: (v) => agreeToTerms.value = v ?? false,
+                                    activeColor: primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  Text(
+                                    'agree_to_terms'.tr,
+                                    style: GoogleFonts.notoKufiArabic(
+                                      fontSize: 12,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -285,8 +304,7 @@ class RegisterView extends GetView<AuthController> {
                               backgroundColor: primaryColor,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
+                                  borderRadius: BorderRadius.circular(16)),
                             ),
                             child: loading
                                 ? const SizedBox(
@@ -300,10 +318,14 @@ class RegisterView extends GetView<AuthController> {
                                 : Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Icon(Icons.arrow_back, color: Colors.white, size: 20),
+                                      Icon(
+                                        isAr ? Icons.arrow_back : Icons.arrow_forward,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
                                       const SizedBox(width: 8),
                                       Text(
-                                        'إنشاء حساب',
+                                        'create_account'.tr,
                                         style: GoogleFonts.notoKufiArabic(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -323,7 +345,7 @@ class RegisterView extends GetView<AuthController> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Text(
-                              'أو سجل عبر',
+                              'or_register_via'.tr,
                               style: GoogleFonts.notoKufiArabic(
                                 color: const Color(0xFF94A3B8),
                                 fontSize: 12,
@@ -335,10 +357,9 @@ class RegisterView extends GetView<AuthController> {
                       ),
                       const SizedBox(height: 18),
 
-                      // Social Logins
+                      // Social Logins (Google & Apple)
                       Row(
                         children: [
-                          // Google Sign-Up
                           Expanded(
                             child: SizedBox(
                               height: 52,
@@ -362,8 +383,6 @@ class RegisterView extends GetView<AuthController> {
                             ),
                           ),
                           const SizedBox(width: 16),
-
-                          // Mock Apple Mascot Sign-Up
                           Expanded(
                             child: SizedBox(
                               height: 52,
@@ -378,10 +397,14 @@ class RegisterView extends GetView<AuthController> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Icon(Icons.face_retouching_natural_rounded, color: Colors.blueAccent, size: 20),
+                                    const Icon(
+                                      Icons.face_retouching_natural_rounded,
+                                      color: Colors.blueAccent,
+                                      size: 20,
+                                    ),
                                     const SizedBox(width: 6),
                                     Text(
-                                      'بديل',
+                                      'apple'.tr,
                                       style: GoogleFonts.notoKufiArabic(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
@@ -404,7 +427,7 @@ class RegisterView extends GetView<AuthController> {
                           GestureDetector(
                             onTap: () => Get.offNamed(Routes.LOGIN),
                             child: Text(
-                              'تسجيل الدخول',
+                              'login'.tr,
                               style: GoogleFonts.notoKufiArabic(
                                 fontSize: 13,
                                 color: primaryColor,
@@ -415,7 +438,7 @@ class RegisterView extends GetView<AuthController> {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            'لديك حساب بالفعل؟',
+                            'already_have_account'.tr,
                             style: GoogleFonts.notoKufiArabic(
                               fontSize: 13,
                               color: const Color(0xFF64748B),
@@ -427,7 +450,7 @@ class RegisterView extends GetView<AuthController> {
 
                       // Footer copyright
                       Text(
-                        '© 2024 EduAssess AI. جميع الحقوق محفوظة.',
+                        'copyright'.tr,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.notoKufiArabic(
                           color: const Color(0xFF94A3B8),
