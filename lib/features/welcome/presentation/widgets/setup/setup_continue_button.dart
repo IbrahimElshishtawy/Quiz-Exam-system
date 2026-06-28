@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SetupContinueButton extends StatelessWidget {
@@ -28,7 +29,7 @@ class SetupContinueButton extends StatelessWidget {
               const Icon(Icons.arrow_back, color: Colors.white, size: 18),
               const SizedBox(width: 8),
               Text(
-                'متابعة',
+                'continue_btn'.tr,
                 style: GoogleFonts.notoKufiArabic(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

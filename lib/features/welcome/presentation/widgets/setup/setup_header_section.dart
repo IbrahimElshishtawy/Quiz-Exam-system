@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SetupHeaderSection extends StatelessWidget {
@@ -33,7 +34,7 @@ class SetupHeaderSection extends StatelessWidget {
 
         // Headings
         Text(
-          'أهلاً بك في منصة الاختبارات',
+          'customize_welcome'.tr,
           textAlign: TextAlign.center,
           style: GoogleFonts.notoKufiArabic(
             fontSize: 20,
@@ -43,7 +44,7 @@ class SetupHeaderSection extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          'قم بتخصيص تجربتك للبدء في رحلتك التعليمية',
+          'customize_subtitle'.tr,
           textAlign: TextAlign.center,
           style: GoogleFonts.notoKufiArabic(
             fontSize: 13,

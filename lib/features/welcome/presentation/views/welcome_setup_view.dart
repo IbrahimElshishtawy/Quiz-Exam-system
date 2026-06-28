@@ -25,7 +25,7 @@ class WelcomeSetupView extends GetView<WelcomeController> {
         leading: TextButton(
           onPressed: () => Get.back(),
           child: Text(
-            'Skip',
+            'skip'.tr,
             style: GoogleFonts.ibmPlexSans(
               color: primaryColor,
               fontSize: 16,
@@ -34,7 +34,7 @@ class WelcomeSetupView extends GetView<WelcomeController> {
           ),
         ),
         title: Text(
-          'EduAssess AI',
+          'app_name'.tr,
           style: GoogleFonts.ibmPlexSans(
             color: primaryColor,
             fontSize: 20,
@@ -63,7 +63,7 @@ class WelcomeSetupView extends GetView<WelcomeController> {
 
                     // Language Selection Section
                     Text(
-                      'اختر اللغة',
+                      'choose_lang'.tr,
                       style: GoogleFonts.notoKufiArabic(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class WelcomeSetupView extends GetView<WelcomeController> {
 
                     // Role Selection Section
                     Text(
-                      'اختر دورك',
+                      'choose_role'.tr,
                       style: GoogleFonts.notoKufiArabic(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -90,8 +90,8 @@ class WelcomeSetupView extends GetView<WelcomeController> {
                       return Column(
                         children: [
                           RoleCardWidget(
-                            title: 'طالب (Student)',
-                            subtitle: 'الوصول إلى الاختبارات والنتائج',
+                            title: 'student'.tr,
+                            subtitle: 'student_desc'.tr,
                             icon: Icons.person_rounded,
                             roleValue: 'student',
                             selectedRole: currentRole,
@@ -99,8 +99,8 @@ class WelcomeSetupView extends GetView<WelcomeController> {
                           ),
                           const SizedBox(height: 12),
                           RoleCardWidget(
-                            title: 'معلم (Teacher)',
-                            subtitle: 'إدارة الاختبارات والتقييمات',
+                            title: 'teacher'.tr,
+                            subtitle: 'teacher_desc'.tr,
                             icon: Icons.psychology_rounded,
                             roleValue: 'instructor',
                             selectedRole: currentRole,
@@ -124,8 +124,8 @@ class WelcomeSetupView extends GetView<WelcomeController> {
                 await controller.saveSettings();
                 Get.back();
                 Get.snackbar(
-                  'تم التخصيص',
-                  'تم حفظ إعدادات التطبيق بنجاح.',
+                  'alert'.tr,
+                  'not_available_demo'.tr,
                   snackPosition: SnackPosition.BOTTOM,
                   backgroundColor: primaryColor,
                   colorText: Colors.white,
