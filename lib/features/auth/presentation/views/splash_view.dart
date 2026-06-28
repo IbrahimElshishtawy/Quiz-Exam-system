@@ -67,6 +67,13 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
 
   void _handleNavigation() {
     final box = GetStorage();
+    final bool hasCompletedOnboarding = box.read<bool>('has_completed_onboarding') ?? false;
+
+    if (!hasCompletedOnboarding) {
+      Get.offAllNamed(Routes.ONBOARDING);
+      return;
+    }
+
     final String? role = box.read('user_role');
 
     if (role == null) {

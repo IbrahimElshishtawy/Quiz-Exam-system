@@ -8,6 +8,8 @@ import 'app_routes.dart';
 import '../features/auth/presentation/views/login_view.dart';
 import '../features/auth/presentation/views/splash_view.dart';
 import '../features/auth/bindings/auth_binding.dart';
+import '../features/onboarding/presentation/views/onboarding_view.dart';
+import '../features/onboarding/bindings/onboarding_binding.dart';
 import '../features/exam/presentation/views/exam_player_view.dart';
 import '../features/exam/presentation/views/exam_details_view.dart';
 import '../features/exam/presentation/views/exam_result_view.dart';
@@ -24,6 +26,11 @@ class AppPages {
     GetPage(
       name: Routes.SPLASH,
       page: () => const SplashView(),
+    ),
+    GetPage(
+      name: Routes.ONBOARDING,
+      page: () => const OnboardingView(),
+      binding: OnboardingBinding(),
     ),
     GetPage(
       name: Routes.LOGIN,
