@@ -21,6 +21,32 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<void> register(String fullName, String email, String password) async {
+    isLoading.value = true;
+    try {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      
+      final box = GetStorage();
+      if (box.read('user_role') == null) {
+        box.write('user_role', 'student');
+      }
+      
+      Get.offAllNamed(Routes.EXAM_DETAILS);
+      
+      Get.snackbar(
+        'نجاح التسجيل',
+        'مرحباً بك $fullName! تم إنشاء حسابك بنجاح.',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: const Color(0xFF10B981),
+        colorText: Colors.white,
+      );
+    } catch (e) {
+      Get.snackbar('Error', 'Registration failed: ${e.toString()}');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   void _handleDemoLogin(String username, String password) {
     final box = GetStorage();
 

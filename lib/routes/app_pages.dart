@@ -6,6 +6,7 @@ import 'package:flutter_application_1/features/exam/presentation/Binding/Exam_Bi
 import 'package:get/get.dart';
 import 'app_routes.dart';
 import '../features/auth/presentation/views/login_view.dart';
+import '../features/auth/presentation/views/register_view.dart';
 import '../features/auth/presentation/views/splash_view.dart';
 import '../features/auth/bindings/auth_binding.dart';
 import '../features/onboarding/presentation/views/onboarding_view.dart';
@@ -48,6 +49,11 @@ class AppPages {
     GetPage(
       name: Routes.LOGIN,
       page: () => const LoginView(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+      name: Routes.REGISTER,
+      page: () => const RegisterView(),
       binding: AuthBinding(),
     ),
 

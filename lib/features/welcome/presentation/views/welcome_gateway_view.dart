@@ -109,35 +109,10 @@ class WelcomeGatewayView extends GetView<WelcomeController> {
                       ),
                       const SizedBox(height: 12),
 
-                      // Register button
                       SizedBox(
                         height: 56,
                         child: OutlinedButton(
-                          onPressed: () {
-                            Get.dialog(
-                              AlertDialog(
-                                title: Text(
-                                  'إنشاء حساب جديد',
-                                  textAlign: TextAlign.right,
-                                  style: GoogleFonts.notoKufiArabic(fontWeight: FontWeight.bold),
-                                ),
-                                content: Text(
-                                  'ميزة إنشاء حساب جديدة غير متاحة حالياً في النسخة التجريبية.\nيرجى استخدام الحسابات التجريبية أو الدخول السريع.',
-                                  textAlign: TextAlign.right,
-                                  style: GoogleFonts.notoKufiArabic(),
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () => Get.back(),
-                                    child: Text(
-                                      'حسناً',
-                                      style: GoogleFonts.notoKufiArabic(color: primaryColor),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+                          onPressed: () => Get.toNamed(Routes.REGISTER),
                           style: OutlinedButton.styleFrom(
                             backgroundColor: secondaryBg,
                             foregroundColor: primaryColor,

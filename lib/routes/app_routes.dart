@@ -6,6 +6,7 @@ abstract class Routes {
   static const WELCOME_GATEWAY = '/welcome-gateway';
   static const WELCOME_SETUP = '/welcome-setup';
   static const LOGIN = '/login';
+  static const REGISTER = '/register';
 
   // Student Routes
   static const STUDENT_DASHBOARD = '/student-dashboard';
