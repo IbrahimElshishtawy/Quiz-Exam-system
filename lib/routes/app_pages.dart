@@ -24,6 +24,8 @@ import '../features/reports/presentation/views/exam_analytics_view.dart';
 import '../features/student_dashboard/presentation/views/student_dashboard_layout.dart';
 import '../features/student_dashboard/presentation/views/upcoming_exams_view.dart';
 import '../features/student_dashboard/bindings/student_dashboard_binding.dart';
+import '../features/instructor_dashboard/presentation/views/instructor_dashboard_layout.dart';
+import '../features/instructor_dashboard/bindings/instructor_dashboard_binding.dart';
 import '../core/middleware/auth_middleware.dart';
 
 class AppPages {
@@ -92,7 +94,8 @@ class AppPages {
     // Instructor Pages
     GetPage(
       name: Routes.INSTRUCTOR_DASHBOARD,
-      page: () => const RoomDashboardView(),
+      page: () => const InstructorDashboardLayout(),
+      binding: InstructorDashboardBinding(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(name: Routes.EXAM_BUILDER, page: () => const ExamBuilderView()),
