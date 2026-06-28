@@ -16,7 +16,6 @@ class CustomCalendarWidget extends GetView<StudentDashboardController> {
 
     // September 2024 Calendar representation: starts from Aug 28 to Sept 24 as in mockup
     // Let's create an array of DateTime objects for this grid
-    final now = DateTime.now();
     final List<CalendarDayModel> days = [
       // August overflow
       CalendarDayModel(date: DateTime(2024, 8, 28), isCurrentMonth: false, label: '28'),
@@ -163,7 +162,7 @@ class CustomCalendarWidget extends GetView<StudentDashboardController> {
                         // Small blue dot if day has tasks (and is not selected)
                         if (hasTasks)
                           Container(
-                            margin: const EdgeInsets.top(2),
+                            margin: const EdgeInsets.only(top: 2),
                             width: 4,
                             height: 4,
                             decoration: BoxDecoration(

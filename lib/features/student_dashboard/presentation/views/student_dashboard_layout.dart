@@ -13,9 +13,6 @@ class StudentDashboardLayout extends GetView<StudentDashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    const primaryColor = Color(0xFF005BBF);
-    const textDark = Color(0xFF1E293B);
-
     return Scaffold(
       body: Obx(() {
         final int activeIndex = controller.currentTabIndex.value;
