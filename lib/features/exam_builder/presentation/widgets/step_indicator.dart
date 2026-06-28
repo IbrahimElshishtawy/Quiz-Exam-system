@@ -8,9 +8,6 @@ class StepIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primaryColor = Color(0xFF005BBF);
-    const inactiveColor = Color(0xFFE2E8F0);
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       child: Row(
@@ -58,7 +55,6 @@ class StepIndicator extends StatelessWidget {
     required bool isCompleted,
   }) {
     const primaryColor = Color(0xFF005BBF);
-    const textDark = Color(0xFF1E293B);
 
     return Column(
       mainAxisSize: MainAxisSize.min,

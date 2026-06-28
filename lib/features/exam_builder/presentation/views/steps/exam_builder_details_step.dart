@@ -225,8 +225,6 @@ class ExamBuilderDetailsStep extends GetView<ExamBuilderController> {
     ValueChanged<String?> onChanged,
     IconData prefixIcon,
   ) {
-    const primaryColor = Color(0xFF005BBF);
-
     return Container(
       height: 52,
       padding: const EdgeInsets.symmetric(horizontal: 14),

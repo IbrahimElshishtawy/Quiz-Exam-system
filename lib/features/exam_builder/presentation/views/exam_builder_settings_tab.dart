@@ -7,7 +7,6 @@ class ExamBuilderSettingsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const textDark = Color(0xFF1E293B);
-    const primaryColor = Color(0xFF005BBF);
 
     return Scaffold(
       backgroundColor: Colors.white,

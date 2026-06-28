@@ -12,7 +12,6 @@ class ExamDraftCard extends GetView<ExamBuilderController> {
   @override
   Widget build(BuildContext context) {
     const textDark = Color(0xFF1E293B);
-    const primaryColor = Color(0xFF005BBF);
 
     Color badgeBgColor = const Color(0xFFECFDF5);
     Color badgeTextColor = const Color(0xFF10B981);
