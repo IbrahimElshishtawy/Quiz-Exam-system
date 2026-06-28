@@ -10,6 +10,7 @@ abstract class Routes {
 
   // Student Routes
   static const STUDENT_DASHBOARD = '/student-dashboard';
+  static const UPCOMING_EXAMS = '/upcoming-exams';
   static const EXAM_DETAILS = '/exam-details';
   static const EXAM_PLAYER = '/exam-player';
   static const EXAM_RESULT = '/exam-result';
