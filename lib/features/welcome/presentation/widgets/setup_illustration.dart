@@ -47,8 +47,6 @@ class _SetupIllustrationState extends State<SetupIllustration>
 
   @override
   Widget build(BuildContext context) {
-    const primaryGlow = Color(0xFF6366F1); // Indigo glow
-
     return SizedBox(
       width: double.infinity,
       height: 180,

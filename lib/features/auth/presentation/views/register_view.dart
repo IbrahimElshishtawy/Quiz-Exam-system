@@ -21,7 +21,6 @@ class RegisterView extends GetView<AuthController> {
 
     const primaryColor = Color(0xFF005BBF);
     const textDark = Color(0xFF1E293B);
-    const secondaryBg = Color(0xFFF1F5F9);
 
     void submit() {
       FocusManager.instance.primaryFocus?.unfocus();
