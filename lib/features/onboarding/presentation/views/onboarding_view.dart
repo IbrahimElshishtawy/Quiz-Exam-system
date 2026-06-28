@@ -11,7 +11,6 @@ class OnboardingView extends GetView<OnboardingController> {
   @override
   Widget build(BuildContext context) {
     const primaryColor = Color(0xFF005BBF);
-    const textDarkColor = Color(0xFF1E293B);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -174,7 +173,7 @@ class OnboardingView extends GetView<OnboardingController> {
                       curve: Curves.easeInOut,
                       child: currentIndex == 1
                           ? Padding(
-                              padding: const EdgeInsets.top(16.0),
+                              padding: const EdgeInsets.only(top: 16.0),
                               child: TextButton(
                                 onPressed: () => controller.skipOnboarding(),
                                 style: TextButton.styleFrom(
