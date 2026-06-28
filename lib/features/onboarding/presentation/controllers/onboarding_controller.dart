@@ -54,7 +54,7 @@ class OnboardingController extends GetxController {
 
   Future<void> finishOnboarding() async {
     await completeOnboardingUseCase();
-    Get.offAllNamed(Routes.LOGIN);
+    Get.offAllNamed(Routes.WELCOME_GATEWAY);
   }
 
   @override

@@ -3,6 +3,8 @@
 abstract class Routes {
   static const SPLASH = '/splash';
   static const ONBOARDING = '/onboarding';
+  static const WELCOME_GATEWAY = '/welcome-gateway';
+  static const WELCOME_SETUP = '/welcome-setup';
   static const LOGIN = '/login';
 
   // Student Routes

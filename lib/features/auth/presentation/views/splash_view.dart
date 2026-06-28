@@ -77,7 +77,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     final String? role = box.read('user_role');
 
     if (role == null) {
-      Get.offAllNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.WELCOME_GATEWAY);
     } else if (role == 'student') {
       Get.offAllNamed(Routes.EXAM_DETAILS);
     } else if (role == 'instructor') {
@@ -85,7 +85,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     } else if (role == 'developer') {
       Get.offAllNamed(Routes.DEVELOPER_DASHBOARD);
     } else {
-      Get.offAllNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.WELCOME_GATEWAY);
     }
   }
 
