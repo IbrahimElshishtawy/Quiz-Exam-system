@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../domain/entities/instructor_exam_entity.dart';
 
+import 'package:get/get.dart';
+import '../../../../routes/app_routes.dart';
+
 class OngoingExamProgressCard extends StatelessWidget {
   final InstructorExamEntity exam;
 
@@ -16,16 +19,19 @@ class OngoingExamProgressCard extends StatelessWidget {
         ? exam.completedStudents / exam.totalStudents
         : 0.0;
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+    return InkWell(
+      onTap: () => Get.toNamed(Routes.EXAM_MONITOR),
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Title row
           Row(
@@ -86,8 +92,8 @@ class OngoingExamProgressCard extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -27,6 +27,8 @@ import '../features/student_dashboard/bindings/student_dashboard_binding.dart';
 import '../features/instructor_dashboard/presentation/views/instructor_dashboard_layout.dart';
 import '../features/instructor_dashboard/bindings/instructor_dashboard_binding.dart';
 import '../core/middleware/auth_middleware.dart';
+import '../features/exam_monitoring/presentation/views/exam_monitor_layout.dart';
+import '../features/exam_monitoring/bindings/exam_monitoring_binding.dart';
 
 class AppPages {
   static const INITIAL = Routes.SPLASH;
@@ -103,7 +105,11 @@ class AppPages {
       page: () => const ExamBuilderLayout(),
       binding: ExamBuilderBinding(),
     ),
-    GetPage(name: Routes.EXAM_MONITOR, page: () => const ExamMonitorView()),
+    GetPage(
+      name: Routes.EXAM_MONITOR,
+      page: () => const ExamMonitorLayout(),
+      binding: ExamMonitoringBinding(),
+    ),
     GetPage(name: Routes.EXAM_REPORTS, page: () => const ExamAnalyticsView()),
     GetPage(
       name: Routes.DEVELOPER_DASHBOARD,
