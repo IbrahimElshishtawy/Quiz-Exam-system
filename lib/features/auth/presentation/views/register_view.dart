@@ -18,6 +18,7 @@ class RegisterView extends GetView<AuthController> {
     final isPasswordHidden = true.obs;
     final isConfirmPasswordHidden = true.obs;
     final agreeToTerms = false.obs;
+    final selectedRole = 'student'.obs;
 
     const primaryColor = Color(0xFF005BBF);
     const textDark = Color(0xFF1E293B);
@@ -39,7 +40,7 @@ class RegisterView extends GetView<AuthController> {
         return;
       }
 
-      controller.register(nameCtrl.text, emailCtrl.text, passCtrl.text);
+      controller.register(nameCtrl.text, emailCtrl.text, passCtrl.text, selectedRole.value);
     }
 
     return Scaffold(
@@ -245,7 +246,74 @@ class RegisterView extends GetView<AuthController> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 16),
+
+                      // Role Selection Section
+                      Text(
+                        isAr ? 'نوع الحساب' : 'Account Type',
+                        style: GoogleFonts.notoKufiArabic(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: textDark,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Obx(() {
+                        final String currentRole = selectedRole.value;
+                        final activeColor = primaryColor;
+                        const activeBgColor = Color(0xFFEFF6FF);
+                        const inactiveBorderColor = Color(0xFFE2E8F0);
+                        const inactiveBgColor = Colors.white;
+
+                        Widget buildRoleOption(String role, String label, IconData icon) {
+                          final bool isSelected = currentRole == role;
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () => selectedRole.value = role,
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                                decoration: BoxDecoration(
+                                  color: isSelected ? activeBgColor : inactiveBgColor,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: isSelected ? activeColor : inactiveBorderColor,
+                                    width: isSelected ? 2 : 1,
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      icon,
+                                      color: isSelected ? activeColor : const Color(0xFF64748B),
+                                      size: 24,
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      label,
+                                      style: GoogleFonts.notoKufiArabic(
+                                        fontSize: 13,
+                                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                                        color: isSelected ? activeColor : textDark,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+
+                        return Row(
+                          children: [
+                            buildRoleOption('student', 'student'.tr, Icons.school_outlined),
+                            const SizedBox(width: 16),
+                            buildRoleOption('instructor', isAr ? 'معيد' : 'TA / Instructor', Icons.psychology_outlined),
+                          ],
+                        );
+                      }),
+                      const SizedBox(height: 16),
 
                       // Terms Agreement Checkbox (Layout direction adapted)
                       Obx(

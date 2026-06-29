@@ -22,21 +22,33 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> register(String fullName, String email, String password) async {
+  Future<void> register(String fullName, String email, String password, String role) async {
     isLoading.value = true;
     try {
       await Future.delayed(const Duration(milliseconds: 1500));
       
       final box = GetStorage();
-      if (box.read('user_role') == null) {
-        box.write('user_role', 'student');
-      }
       
-      Get.offAllNamed(Routes.EXAM_DETAILS);
+      // Save registered user details in local storage
+      final registeredUsers = box.read<Map>('registered_users') ?? {};
+      registeredUsers[email.trim().toLowerCase()] = {
+        'fullName': fullName,
+        'password': password,
+        'role': role,
+      };
+      box.write('registered_users', registeredUsers);
+      
+      box.write('user_role', role);
+      
+      if (role == 'instructor') {
+        Get.offAllNamed(Routes.INSTRUCTOR_DASHBOARD);
+      } else {
+        Get.offAllNamed(Routes.EXAM_DETAILS);
+      }
       
       Get.snackbar(
         'نجاح التسجيل',
-        'مرحباً بك $fullName! تم إنشاء حسابك بنجاح.',
+        'مرحباً بك $fullName! تم إنشاء حسابك بنجاح كـ ${role == 'instructor' ? 'معيد' : 'طالب'}.',
         snackPosition: SnackPosition.TOP,
         backgroundColor: const Color(0xFF10B981),
         colorText: Colors.white,
@@ -75,13 +87,30 @@ class AuthController extends GetxController {
       return;
     }
 
+    // Check registered users
+    final registeredUsers = box.read<Map>('registered_users') ?? {};
+    if (registeredUsers.containsKey(u)) {
+      final user = registeredUsers[u];
+      if (user['password'] == p) {
+        final role = user['role'] ?? 'student';
+        box.write('user_role', role);
+        
+        if (role == 'instructor') {
+          Get.offAllNamed(Routes.INSTRUCTOR_DASHBOARD);
+        } else {
+          Get.offAllNamed(Routes.EXAM_DETAILS);
+        }
+        return;
+      }
+    }
+
     Get.snackbar(
       'Error',
       'بيانات الدخول غلط (Demo).\n'
           'جرّب:\n'
           'student / 1234\n'
           'instructor / 1234\n'
-          'developer / dev123',
+          'أو أنشئ حساباً جديداً للدخول به.',
     );
   }
 
