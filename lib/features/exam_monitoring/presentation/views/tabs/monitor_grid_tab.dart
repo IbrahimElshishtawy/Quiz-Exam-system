@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../controllers/exam_monitoring_controller.dart';
-import '../../domain/entities/student_monitor.dart';
+import '../../../domain/entities/student_monitor.dart';
 import '../student_live_monitor_view.dart';
 
 class MonitorGridTab extends GetView<ExamMonitoringController> {
@@ -10,8 +10,7 @@ class MonitorGridTab extends GetView<ExamMonitoringController> {
 
   @override
   Widget build(BuildContext context) {
-    const primaryColor = Color(0xFF005BBF);
-    const textDark = Color(0xFF1E293B);
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

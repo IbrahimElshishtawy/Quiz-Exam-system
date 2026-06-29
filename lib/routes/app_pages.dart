@@ -19,7 +19,6 @@ import '../features/exam/presentation/views/exam_details_view.dart';
 import '../features/exam/presentation/views/exam_result_view.dart';
 import '../features/exam_builder/presentation/views/exam_builder_layout.dart';
 import '../features/exam_builder/bindings/exam_builder_binding.dart';
-import '../features/reports/presentation/views/exam_reports_view.dart';
 import '../features/reports/presentation/views/exam_analytics_view.dart';
 import '../features/student_dashboard/presentation/views/student_dashboard_layout.dart';
 import '../features/student_dashboard/presentation/views/upcoming_exams_view.dart';

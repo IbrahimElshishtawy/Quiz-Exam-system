@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../controllers/exam_monitoring_controller.dart';
+import '../controllers/exam_monitoring_controller.dart';
 import '../../domain/entities/student_monitor.dart';
 import '../../domain/entities/violation_log.dart';
 import 'student_chat_view.dart';

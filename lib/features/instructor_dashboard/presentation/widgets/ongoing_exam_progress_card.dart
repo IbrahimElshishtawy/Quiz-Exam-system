@@ -92,9 +92,9 @@ class OngoingExamProgressCard extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
+    ));
   }
 }
