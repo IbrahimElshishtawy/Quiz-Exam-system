@@ -1,153 +1,162 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../controllers/auth_controller.dart';
+import '../widgets/login/login_header_section.dart';
+import '../widgets/login/login_form.dart';
+import '../widgets/login/login_submit_button.dart';
+import '../widgets/login/biometric_login_button.dart';
+import '../widgets/login/login_footer.dart';
 
 class LoginView extends GetView<AuthController> {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const primaryColor = Color(0xFF005BBF);
+    const textDark = Color(0xFF1E293B);
+    const slateBg = Color(0xFFF8FAFC); // Light grayish-blue canvas background
+
     final usernameCtrl = TextEditingController();
     final passwordCtrl = TextEditingController();
     final formKey = GlobalKey<FormState>();
-
-    final isPasswordHidden = true.obs;
+    final isAr = Get.locale?.languageCode == 'ar';
 
     void submit() {
       FocusManager.instance.primaryFocus?.unfocus();
-
       if (!(formKey.currentState?.validate() ?? false)) return;
-
       controller.login(usernameCtrl.text, passwordCtrl.text);
     }
 
     return Scaffold(
+      backgroundColor: slateBg,
+      appBar: AppBar(
+        backgroundColor: slateBg,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            isAr ? Icons.arrow_forward : Icons.arrow_back,
+            color: textDark,
+          ),
+          onPressed: () => Get.back(),
+        ),
+        title: Text(
+          'login'.tr,
+          style: GoogleFonts.notoKufiArabic(
+            color: textDark,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Center(
+              child: Text(
+                'EduAssess AI',
+                style: GoogleFonts.ibmPlexSans(
+                  color: primaryColor,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14.5,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 420),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(height: 24),
-
-                    // Header
-                    const Icon(Icons.lock_rounded, size: 56),
-                    const SizedBox(height: 12),
-                    Text(
-                      'welcome_back'.tr,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineSmall
-                          ?.copyWith(fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'sign_in_continue'.tr,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: Colors.black54),
-                    ),
-
-                    const SizedBox(height: 28),
-
-                    // Username
-                    TextFormField(
-                      controller: usernameCtrl,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        labelText: 'username'.tr,
-                        hintText: 'student / instructor / developer',
-                        prefixIcon: const Icon(Icons.person_outline),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Smooth entry animation for the main Card
+                  TweenAnimationBuilder<double>(
+                    duration: const Duration(milliseconds: 600),
+                    tween: Tween<double>(begin: 0.0, end: 1.0),
+                    curve: Curves.easeOutCubic,
+                    builder: (context, value, child) {
+                      return Opacity(
+                        opacity: value,
+                        child: Transform.translate(
+                          offset: Offset(0, 40 * (1.0 - value)),
+                          child: child,
                         ),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(24),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.04),
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
+                          ),
+                        ],
                       ),
-                      validator: (v) {
-                        if (v == null || v.trim().isEmpty) {
-                          return 'enter_username'.tr;
-                        }
-                        return null;
-                      },
-                    ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Header Badge & Welcome Greetings
+                          const LoginHeaderSection(),
+                          const SizedBox(height: 24),
 
-                    const SizedBox(height: 14),
+                          // Login Input Fields Form
+                          LoginForm(
+                            usernameCtrl: usernameCtrl,
+                            passwordCtrl: passwordCtrl,
+                            formKey: formKey,
+                            onSubmit: submit,
+                          ),
+                          const SizedBox(height: 20),
 
-                    // Password
-                    Obx(
-                      () => TextFormField(
-                        controller: passwordCtrl,
-                        obscureText: isPasswordHidden.value,
-                        textInputAction: TextInputAction.done,
-                        onFieldSubmitted: (_) => submit(),
-                        decoration: InputDecoration(
-                          labelText: 'password'.tr,
-                          hintText: '1234 / dev123',
-                          prefixIcon: const Icon(Icons.lock_outline),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
+                          // Submit Action Button
+                          Obx(() => LoginSubmitButton(
+                                loading: controller.isLoading.value,
+                                onPressed: submit,
+                              )),
+                          const SizedBox(height: 24),
+
+                          // Or separator
+                          Row(
+                            children: [
+                              const Expanded(child: Divider(color: Color(0xFFE2E8F0))),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                child: Text(
+                                  'or_continue_with'.tr,
+                                  style: GoogleFonts.notoKufiArabic(
+                                    color: const Color(0xFF94A3B8),
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                              const Expanded(child: Divider(color: Color(0xFFE2E8F0))),
+                            ],
                           ),
-                          suffixIcon: IconButton(
-                            onPressed:
-                                () =>
-                                    isPasswordHidden.value =
-                                        !isPasswordHidden.value,
-                            icon: Icon(
-                              isPasswordHidden.value
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility_outlined,
-                            ),
+                          const SizedBox(height: 20),
+
+                          // Biometric Login Button
+                          BiometricLoginButton(
+                            onTap: () => controller.login('student', '1234'),
                           ),
-                        ),
-                        validator: (v) {
-                          if (v == null || v.trim().isEmpty) {
-                            return 'enter_password'.tr;
-                          }
-                          if (v.trim().length < 3) {
-                            return 'password_short_login'.tr;
-                          }
-                          return null;
-                        },
+                        ],
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 28),
 
-                    const SizedBox(height: 18),
-
-                    // Login button
-                    Obx(
-                      () => SizedBox(
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: controller.isLoading.value ? null : submit,
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                          ),
-                          child:
-                              controller.isLoading.value
-                                  ? const SizedBox(
-                                    width: 22,
-                                    height: 22,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                    ),
-                                  )
-                                  : Text(
-                                      'login'.tr,
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 14),
-                  ],
-                ),
+                  // Redirect link footer
+                  const LoginFooter(),
+                ],
               ),
             ),
           ),
