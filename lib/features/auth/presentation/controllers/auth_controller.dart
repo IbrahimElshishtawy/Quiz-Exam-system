@@ -66,15 +66,17 @@ class AuthController extends GetxController {
     final u = username.trim().toLowerCase();
     final p = password.trim();
 
-    // Student demo account
-    if (u == 'student' && p == '1234') {
+    // Student demo accounts
+    if ((u == 'student' && p == '1234') || (u == 'student@demo.com' && p == '123456')) {
       box.write('user_role', 'student');
       Get.offAllNamed(Routes.EXAM_DETAILS);
       return;
     }
 
-    // Instructor demo account
-    if (u == 'instructor' && p == '1234') {
+    // Instructor demo accounts
+    if ((u == 'instructor' && p == '1234') || 
+        (u == 'ta@demo.com' && p == '123456') || 
+        (u == 'instructor@demo.com' && p == '123456')) {
       box.write('user_role', 'instructor');
       Get.offAllNamed(Routes.INSTRUCTOR_DASHBOARD);
       return;
@@ -106,11 +108,10 @@ class AuthController extends GetxController {
 
     Get.snackbar(
       'Error',
-      'بيانات الدخول غلط (Demo).\n'
-          'جرّب:\n'
-          'student / 1234\n'
-          'instructor / 1234\n'
-          'أو أنشئ حساباً جديداً للدخول به.',
+      'بيانات الدخول غلط.\n'
+          'جرّب الحسابات الافتراضية:\n'
+          '• طالب: student@demo.com / 123456\n'
+          '• معيد: ta@demo.com / 123456',
     );
   }
 

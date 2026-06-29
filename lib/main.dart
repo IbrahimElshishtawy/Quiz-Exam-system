@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'core/config/app_config.dart';
 import 'routes/app_pages.dart';
 import 'core/theme/app_theme.dart';
@@ -9,6 +10,8 @@ import 'core/localization/app_translations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Disable runtime fetching to prevent SocketExceptions when offline
+  GoogleFonts.config.allowRuntimeFetching = false;
   AppConfig.validate();
   await GetStorage.init();
   Get.put(SettingsController(), permanent: true);
